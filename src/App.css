@@ -1,0 +1,16 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+
+.leaflet-container{
+  
+  width: 99%;
+  height:50vh;
+  border-width: 1px;
+  align-self: 'center';
+  margin:5px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
