@@ -12,50 +12,27 @@ import {
 
   const data = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400
+      name: "Symptoms",
+      symptoms: 100,
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210
+      name: "No-Symptoms",
+      noSymptoms: 50,
+
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290
+      name: "Negative",
+      negative: 120,
+
     },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100
-    }
+    
   ];
 
+  const data2= [ {symptoms: 100,noSymptoms: 50,negative: 120,}]
+  
+
 const MyBarChart = ()=> {
+
 
 
     return (
@@ -63,17 +40,20 @@ const MyBarChart = ()=> {
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
         data={data}
-        barSize={20}
+        barSize={60}
         margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+        barGap={25}
       >
-        <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
+        <XAxis  dataKey="name" padding={{ left: 10, right: 10 }} />
         <YAxis />
         <Tooltip />
-        <Legend />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Bar dataKey="pv" fill="#8884d8" background={{ fill: "#eee" }} />
+        <Legend layout='horizontal'   />
+        <CartesianGrid strokeDasharray="2" />
+        <Bar  dataKey="symptoms" fill="red" label={{ fill: 'black', fontSize: 18 }} />
+        <Bar dataKey="noSymptoms" fill="orange" label={{ fill: 'black', fontSize: 18 }}/>
+        <Bar dataKey="negative" fill="green"  label={{ fill: 'black', fontSize: 18 }}/>
       </BarChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer>    
       </div>
   
     );

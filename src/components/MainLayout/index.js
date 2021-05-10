@@ -6,18 +6,16 @@ import { Row, Col } from "antd";
 
 import CustomHeader from "../CustomHeader";
 import SideBar from "../Sidebar";
-import CustomDrawer from "../CustomDrawer";
 
-
-import MyCard from "../MyCard";
+import CustomCard from "../CustomCard";
 import Map from "../Map";
 import MyTable from "../MyTable";
-import MyCalendar from "../MyCalendar";
-import MyRadarChart from "../MyRadarChart";
+import CustomCalendar from "../CustomCalendar";
 import MyBarChart from "../MyBarChart";
+import CustomPie from "../CustomPie";
 
-
-
+// custom provider 
+import {DataProvider} from '../../context/DataContext'
 
 import {
   WarningOutlined,
@@ -26,10 +24,12 @@ import {
   HeartOutlined,
 } from "@ant-design/icons";
 
+
 const { Content } = Layout;
 
 const MainLayout = () => {
   return (
+    <DataProvider>
     <Layout style={{ minHeight: "100vh" }}>
       <CustomHeader/>
       <Layout className="site-layout">
@@ -39,30 +39,30 @@ const MainLayout = () => {
             <Col span={18}>
               <Row justify="space-between" align="bottom">
                 <Col span={6}>
-                  <MyCard
+                  <CustomCard
                     number="128"
-                    description="Positive"
+                    description="Positive With"
                     icon={<WarningOutlined style={{ fontSize: "60px" }} />}
                   />
                 </Col>
                 <Col span={6}>
-                  <MyCard
-                    number="50"
-                    description="Insulators"
+                  <CustomCard
+                    number="50" 
+                    description="Positive Without"
                     icon={
                       <UsergroupDeleteOutlined style={{ fontSize: "60px" }} />
                     }
                   />
                 </Col>
                 <Col span={6}>
-                  <MyCard
+                  <CustomCard
                     number="10"
-                    description="Vaccinated"
+                    description="Negative"
                     icon={<CheckSquareOutlined style={{ fontSize: "60px" }} />}
                   />
                 </Col>
                 <Col span={6}>
-                  <MyCard
+                  <CustomCard
                     number="50"
                     description="Healthy"
                     icon={<HeartOutlined style={{ fontSize: "60px" }} />}
@@ -77,14 +77,13 @@ const MainLayout = () => {
               <Row>
                 <Col span={24}>
                 <MyTable />
-                <CustomDrawer/>
                 </Col>
               </Row>
             </Col>
             <Col span={6}>
                     <Row>
                       <Col  span={24}>
-                      <MyCalendar/>
+                      <CustomCalendar/>
                       </Col>
                     </Row>
                     <Row>
@@ -94,7 +93,7 @@ const MainLayout = () => {
                     </Row>
                     <Row>
                       <Col span={24} >
-                      <MyRadarChart/>
+                      <CustomPie/>
                       </Col>
                     </Row>
             </Col>
@@ -102,6 +101,7 @@ const MainLayout = () => {
         </Content>
       </Layout>
     </Layout>
+    </DataProvider>
   );
 };
 
