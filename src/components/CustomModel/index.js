@@ -55,8 +55,8 @@ const CustomModel = ({visible,setVisible,  userInfo})=>{
       
       >
         <Card.Meta 
-        title={'number'}
-        description={'description'}/>
+        title={'Send The Police'}
+        description={'send the police to user address '}/>
       </Card>
       <Card
         hoverableauto={'true'}
@@ -65,8 +65,8 @@ const CustomModel = ({visible,setVisible,  userInfo})=>{
       
       >
         <Card.Meta 
-        title={'number'}
-        description={'description'}/>
+        title={'Send notification'}
+        description={'send notification by the app'}/>
       </Card>
       <Card
         hoverableauto={'true'}
@@ -75,8 +75,8 @@ const CustomModel = ({visible,setVisible,  userInfo})=>{
       
       >
         <Card.Meta 
-        title={'number'}
-        description={'description'}/>
+        title={'Send SMS'}
+        description={'send sms to alert the user'}/>
       </Card>
           </Modal>
         </>
