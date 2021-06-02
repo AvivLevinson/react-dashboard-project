@@ -4,12 +4,16 @@ import { Table, Tag,Input, Button,Space  } from "antd";
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 
-import { useData } from "../../context/DataContext";
+import CustomModel from '../CustomModel'
 
+import { useData } from "../../context/DataContext";
 
 
 const MyTable = () => {
   const { usersData } = useData();
+
+  const [showModel, setShowModel] = useState(false);
+  const [userActionInfo, setUserActionInfo] = useState();
   const [tableData, setTableData] = useState([]);
   const [search, setSearch] = useState({    searchText: '',searchedColumn: ''})
   const reference = useRef();
@@ -18,18 +22,17 @@ const MyTable = () => {
     const data = [];
     usersData.forEach((user,index) => {    
 
-
       data.push({
         key: index,
-        fullName: user.userName,
+        fullName: user.name,
         id: user.id,
-        address: user.address,
+        address: user.address.street,
         city: user.city,
-        isolate_start_day: user.start_isolated,
-        isolate_end_day: user.end_isolated,
-        positive_to_covid: [user.positive_to_covid],
-        phone_number: user.phone_number
-        
+        isolate_start_day: user.date.startIsolated,
+        isolate_end_day: user.date.endIsolated,
+        positive_to_covid: [user.covidResult.positive],
+        phone_number: user.phone,
+        collaborator: [user.collaborator]
       });
 
     });
@@ -110,6 +113,7 @@ const MyTable = () => {
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
+  
     setSearch({
       searchText: selectedKeys[0],
       searchedColumn: dataIndex,
@@ -122,14 +126,18 @@ const MyTable = () => {
   };
 
 
+  const openModel = (value)=>{
+    setUserActionInfo(value);
+    setShowModel(true);
+
+  }
+
   
   const columns = [
     {
-      title: "Full Name",
+      title: "Name",
       dataIndex: "fullName",
-      width: 100,
-      ...getColumnSearchProps('fullName'),
-      
+      width: 100,      
     },
     {
       title: "Id",
@@ -144,46 +152,43 @@ const MyTable = () => {
       width: 100,
     },
     {
-      title: "Phone Number",
+      title: "Phone",
       dataIndex: "phone_number",
-      width: 100,
-      ...getColumnSearchProps('phone_number'),
-  
+      width: 100,  
     },
     {
       title: "City",
       dataIndex: "city",
-      width: 100,
-      ...getColumnSearchProps('city'),
+      width: 80,
     },
     {
-      title: "Isolated Start Day",
+      title: "Isolated Start",
       dataIndex: "isolate_start_day",
       width: 120,
       ...getColumnSearchProps('isolate_start_day'),
     },
     {
-      title: "Isolated End Day",
+      title: "Isolated End",
       dataIndex: "isolate_end_day",
       width: 120,
       ...getColumnSearchProps('isolate_end_day'),
 
     },
     { 
-    title: "Positive To Covid",
+    title: "Positive",
     dataIndex: "positive_to_covid",
-    width: 120,
+    width: 100,
     ...getColumnSearchProps('positive_to_covid'),
     render: tags => (
       <>
       {
         tags.map((tag)=>{
   
-          let color = tag === 'true'? 'red' : 'green';
+          let color = tag? 'red' : 'green';
   
           return(
             <Tag color={color} key={tag}>
-            {tag.toUpperCase()}
+            {tag? 'YES': 'NO'}
           </Tag>
           );
         })
@@ -192,19 +197,44 @@ const MyTable = () => {
   
     ),
   },
+  { 
+    title: "Collaborator",
+    dataIndex: "collaborator",
+    width: 130,
+    ...getColumnSearchProps('collaborator'),
+    render: tags => (
+      <>
+      {
+        tags.map((tag)=>{
+  
+          let color = tag === 'Collaborator'? 'green' : tag ==='Uncollaborator'? 'red' : 'orange';
+  
+          return(
+            <Tag color={color} key={tag}>
+            {tag}
+          </Tag>
+          );
+        })
+      }
+      </>
+  
+    ),
+  },
+
+
   {
     title: 'Action',
     key: 'operation',
-    width: 100,
+    width: 80,
     render: (value) => {
       return(
         <Button
         type="primary"
-         onClick = {()=>{
-           console.log(value)
+         onClick ={()=>{
+          openModel(value);
          }}
         >
-          make action
+          action
         </Button>
 
       )
@@ -215,12 +245,14 @@ const MyTable = () => {
   
   return (
     
+    <>
+    {showModel?<CustomModel visible={showModel} setVisible={setShowModel}  userInfo={userActionInfo}/> : <></>}
     <Table
       bordered={true}
       columns={columns}
       dataSource={tableData}
       pagination={false}
-      scroll={{ y: 200 }}
+      scroll={{ y: 220 }}
       showHeader={true}
       style={{
         borderStyle: "solid",
@@ -231,7 +263,7 @@ const MyTable = () => {
       }}
     />
 
-    
+    </>
   );
 };
 

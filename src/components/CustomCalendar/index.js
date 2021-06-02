@@ -3,6 +3,8 @@ import { Calendar } from 'antd';
 
 import moment from "moment";
 
+import DateRange from '../DateRange'
+
 import {useData} from '../../context/DataContext';
 
 const CustomCalendar = () => {
@@ -20,27 +22,12 @@ const CustomCalendar = () => {
 
   
   const onSelect = (value) => {
-    const date = value.format('DD-MM-YYYY');
-    console.log('this is selsted date:', date);
+    const date = value;
+    console.log('this is selected date:', date);
     getDataByDate(date)
-    //setSelectedDate(date);
+    setSelectedDate(date);
 
   };
-
-
-
-
-  useEffect(()=>{
-    console.log('useEffect CustomCalendar');
-    const date = moment();
-    console.log(date.format('DD-MM-YYYY'));
-
-  },[])
-
-
-
-
-
 
   return (
     <div
@@ -53,12 +40,14 @@ const CustomCalendar = () => {
         boxShadow: " 0 2px 2px 0 rgba(0, 0, 0, 0.2)",
       }}
     >
+      <DateRange/>
       <Calendar
-        value = {date}
+        value = {selectedDate}
         fullscreen={false}
         onPanelChange={onPanelChange}
         onSelect={onSelect}  
-            />
+        />
+
     </div>
   );
 };

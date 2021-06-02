@@ -7,22 +7,19 @@ import { Row, Col } from "antd";
 import CustomHeader from "../CustomHeader";
 import SideBar from "../Sidebar";
 
-import CustomCard from "../CustomCard";
 import Map from "../Map";
 import MyTable from "../MyTable";
 import CustomCalendar from "../CustomCalendar";
 import MyBarChart from "../MyBarChart";
 import CustomPie from "../CustomPie";
+import TopBar from "../TopBar";
+
+
 
 // custom provider 
 import {DataProvider} from '../../context/DataContext'
 
-import {
-  WarningOutlined,
-  UsergroupDeleteOutlined,
-  CheckSquareOutlined,
-  HeartOutlined,
-} from "@ant-design/icons";
+
 
 
 const { Content } = Layout;
@@ -37,38 +34,7 @@ const MainLayout = () => {
         <Content>
           <Row>   
             <Col span={18}>
-              <Row justify="space-between" align="bottom">
-                <Col span={6}>
-                  <CustomCard
-                    number="128"
-                    description="Positive With"
-                    icon={<WarningOutlined style={{ fontSize: "60px" }} />}
-                  />
-                </Col>
-                <Col span={6}>
-                  <CustomCard
-                    number="50" 
-                    description="Positive Without"
-                    icon={
-                      <UsergroupDeleteOutlined style={{ fontSize: "60px" }} />
-                    }
-                  />
-                </Col>
-                <Col span={6}>
-                  <CustomCard
-                    number="10"
-                    description="Negative"
-                    icon={<CheckSquareOutlined style={{ fontSize: "60px" }} />}
-                  />
-                </Col>
-                <Col span={6}>
-                  <CustomCard
-                    number="50"
-                    description="Healthy"
-                    icon={<HeartOutlined style={{ fontSize: "60px" }} />}
-                  />
-                </Col>
-              </Row>
+              <TopBar/>
               <Row>
                 <Col span={24}>
                 <Map />

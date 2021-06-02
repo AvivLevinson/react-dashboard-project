@@ -10,29 +10,31 @@ import {
     ResponsiveContainer
   } from "recharts";
 
+  import { useData } from "../../context/DataContext";
+
+
+const MyBarChart = ()=> {
+
+  const { globalInfo } = useData();
+
+
   const data = [
     {
       name: "Symptoms",
-      symptoms: 100,
+      symptoms: globalInfo.positiveWithSympyoms,
     },
     {
       name: "No-Symptoms",
-      noSymptoms: 50,
+      noSymptoms: globalInfo.positiveWithOutSympyoms,
 
     },
     {
       name: "Negative",
-      negative: 120,
+      negative: globalInfo.negative,
 
     },
     
   ];
-
-  const data2= [ {symptoms: 100,noSymptoms: 50,negative: 120,}]
-  
-
-const MyBarChart = ()=> {
-
 
 
     return (
@@ -49,9 +51,9 @@ const MyBarChart = ()=> {
         <Tooltip />
         <Legend layout='horizontal'   />
         <CartesianGrid strokeDasharray="2" />
-        <Bar  dataKey="symptoms" fill="red" label={{ fill: 'black', fontSize: 18 }} />
-        <Bar dataKey="noSymptoms" fill="orange" label={{ fill: 'black', fontSize: 18 }}/>
-        <Bar dataKey="negative" fill="green"  label={{ fill: 'black', fontSize: 18 }}/>
+        <Bar  dataKey="symptoms" fill="#FF5143" label={{ fill: 'black', fontSize: 15 }} />
+        <Bar dataKey="noSymptoms" fill='#FFB946' label={{ fill: 'black', fontSize: 15 }}/>
+        <Bar dataKey="negative" fill="#2ED47A"  label={{ fill: 'black', fontSize: 15 }}/>
       </BarChart>
       </ResponsiveContainer>    
       </div>

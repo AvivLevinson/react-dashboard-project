@@ -5,7 +5,6 @@ const BASE_URL = 'http://localhost:5000/covid-insulated';
 
 export const fetchDataByDate = async (date)=>{
     console.log('getDataByDate -> ');
-
     const endPoint = BASE_URL + '/api/supervisor/data-by-date';
     
     const params =  {

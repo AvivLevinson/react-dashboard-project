@@ -1,31 +1,34 @@
 import React from "react";
 import { PieChart, Pie, ResponsiveContainer,Cell, Tooltip, Legend} from 'recharts';
 
+import { useData } from "../../context/DataContext";
 
 
 const CustomPie=()=>{
 
+const { globalInfo } = useData();
+
+
     
 const COLORS = {
-    Collaborator:'green',
-    Uncollaborator:'red',
-    Reporting_Incorrect_Data:'orange'
+    Collaborator:'#2ED47A',
+    Uncollaborator:'#FF5143',
+    Reporting_Incorrect_Data:'#FFB946'
 
 }
-
 
 const pieData = [
     {
         "name": "Collaborator",
-        "value": 25
+        "value": globalInfo.collaborator
     },
     {
         "name": "Uncollaborator",
-        "value": 15
+        "value": globalInfo.uncollaborator
     },
     {
         "name": "Reporting_Incorrect_Data",
-        "value": 17
+        "value": globalInfo.incorrectReporting
     },
 ];
 
